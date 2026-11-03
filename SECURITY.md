@@ -2,22 +2,24 @@
 
 ## Supported Versions
 
-| Version | Supported |
-|---|---|
-| Default Branch (main) | Yes |
+| Version | Supported | Description |
+| :--- | :--- | :--- |
+| `1.0.x` | Yes | Current stable release branch (`main`) |
+| `< 1.0.0` | No | Legacy versions |
+
+## Document Generation Security Scope
+
+whatsapp-docgen-bot processes arbitrary user text into binary document structures. Security invariants include:
+* **Memory Bounding**: Document rendering engines enforce strict limits on total slide count (`MAX_SLIDES_PER_DECK`) and page count (`MAX_PDF_PAGES`) to prevent memory exhaustion attacks.
+* **Sanitized Layout Injection**: Dynamic inputs rendered to PDF/PPTX formats must prevent binary payload injection and template breakout.
+* **Credential Isolation**: Groq API keys and WhatsApp session tokens must remain strictly in process memory and never be serialized into generated document metadata.
 
 ## Reporting a Vulnerability
 
-We take the security of this repository and our software seriously. If you believe you have identified a vulnerability, security flaw, or credential exposure, please report it immediately through private disclosure channels.
+If you discover a vulnerability or denial-of-service vector in the document rendering engine, report it privately:
 
-* **Security Contact**: goharrehmanfsd260@gmail.com
-* **Maintainer**: Gohar Rehman (@itsgoharrehman)
+* **Security Contact**: Gohar Rehman
+* **Email**: `goharrehmanfsd260@gmail.com`
+* **Response SLA**: Initial acknowledgement within 48 hours; resolution timeline provided within 7 days.
 
-### Vulnerability Report Details
-When reporting a vulnerability, please provide:
-* A detailed description of the issue and potential security impact.
-* Exact step-by-step reproduction instructions or a minimal proof-of-concept.
-* Specific affected files, functions, or endpoints.
-
-### Responsible Disclosure
-Please do not open public GitHub issues or public pull requests detailing undisclosed vulnerabilities. Reports will be acknowledged within 48 hours and investigated promptly.
+Please do not open public GitHub issues or discussions regarding undisclosed vulnerabilities.
